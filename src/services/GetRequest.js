@@ -2,11 +2,6 @@ import axios from 'axios';
 
 class GetRequest {
   
-  // static async getRequest(username) {
-  //   const response = await axios.get(`https://api.github.com/users/${username}`);
-  //   return response.data;
-  // }
-
   static getRequest(username) {
     return new Promise(resolve => {
       axios.get(`https://api.github.com/users/${username}`).then(response => {

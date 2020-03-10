@@ -9,6 +9,7 @@ const styles = {
     borderRadius: '5px',
     boxShadow: '0 1px 6px -2px #000',
     marginBottom: '30px',
+    backgroundColor: '#FFF',
   },
   img: {
     width: '150px',

@@ -8,7 +8,7 @@ import githublogo from '../assets/githublogo.png';
 const styles = {
   root: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
     marginBottom: '50px',
