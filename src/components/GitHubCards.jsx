@@ -23,18 +23,21 @@ class GitHubCards extends React.Component {
   componentDidMount() {
     const getData = async () => {
       const result = await GetRequest.getRequest(username, true);
-      console.log(result);
-      this.setUserData(result);
+      const resultData = [result.user];
+      result.followers.forEach(follower => {
+        resultData.push(follower.data);
+      });
+      this.setUserData(resultData);
     };
     getData();
   }
 
   setUserData = data => {
     this.setState({
-      userData: [...(this.state.userData), data],
+      userData: [...(this.state.userData), ...data],
     });
   }
-
+  
   render() {
     const { classes } = this.props;
     return (

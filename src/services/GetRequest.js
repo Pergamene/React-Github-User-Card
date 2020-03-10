@@ -2,9 +2,27 @@ import axios from 'axios';
 
 class GetRequest {
   
-  static async getRequest(username, getFollowers) {
-    const response = await axios.get(`https://api.github.com/users/${username}`);
-    return response.data;
+  // static async getRequest(username) {
+  //   const response = await axios.get(`https://api.github.com/users/${username}`);
+  //   return response.data;
+  // }
+
+  static getRequest(username) {
+    return new Promise(resolve => {
+      axios.get(`https://api.github.com/users/${username}`).then(response => {
+        const user = response.data;
+        axios.get(user.followers_url).then(response => {
+          const followers = response.data;
+          const promises = [];
+          for (let i = 0; i < followers.length; i++) {
+            promises.push(axios.get(`https://api.github.com/users/${followers[i].login}`));
+          }
+          Promise.all(promises).then(results => {
+            resolve({ user, followers: results });
+          });
+        });
+      });
+    });
   }
 }
 
